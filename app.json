@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HardwareInfo",
-    "slug": "HardwareInfo",
+    "name": "Hardware Info",
+    "slug": "hardwareinfo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vshalch.hardwareinfo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c20a3ed7-a072-456d-812b-cb9334aa1c0b"
+      }
     }
   }
 }
