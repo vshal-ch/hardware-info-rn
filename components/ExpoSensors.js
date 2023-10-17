@@ -41,17 +41,21 @@ export const AccelerometerSensor = () => {
   });
 
   useEffect(() => {
-    accelerometer.subscribe(data => {
-      const {x, y, z} = data;
-      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
-        update({x, y, z}, setValues, 'm/s²');
-      } else {
-        setValues({
-          title: 'Accelerometer',
-          available: false,
-        });
-      }
-    });
+    try {
+      accelerometer.subscribe(data => {
+        const {x, y, z} = data;
+        if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
+          update({x, y, z}, setValues, 'm/s²');
+        } else {
+          setValues({
+            title: 'Accelerometer',
+            available: false,
+          });
+        }
+      });
+    } catch (err) {
+      return;
+    }
   }, []);
 
   return <SensorItem data={values} />;
@@ -64,17 +68,22 @@ export const BarometerSensor = () => {
   });
 
   useEffect(() => {
-    barometer.subscribe(data => {
-      const {pressure} = data;
-      if (Number.isFinite(pressure)) {
-        update({pressure}, setValues, 'hpA');
-      } else {
-        setValues({
-          title: 'Barometer',
-          available: false,
+    try {
+      barometer.isSensorAvailable &&
+        barometer.subscribe(data => {
+          const {pressure} = data;
+          if (Number.isFinite(pressure)) {
+            update({pressure}, setValues, 'hpA');
+          } else {
+            setValues({
+              title: 'Barometer',
+              available: false,
+            });
+          }
         });
-      }
-    });
+    } catch (err) {
+      return;
+    }
   });
   return <SensorItem data={values} />;
 };
@@ -85,17 +94,21 @@ export const GyroscopeSensor = () => {
     available: false,
   });
   useEffect(() => {
-    gyroscope.subscribe(data => {
-      const {x, y, z} = data;
-      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
-        update({x, y, z}, setValues, 'm/s²');
-      } else {
-        setValues({
-          title: 'Gyroscope',
-          available: false,
-        });
-      }
-    });
+    try {
+      gyroscope.subscribe(data => {
+        const {x, y, z} = data;
+        if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
+          update({x, y, z}, setValues, 'm/s²');
+        } else {
+          setValues({
+            title: 'Gyroscope',
+            available: false,
+          });
+        }
+      });
+    } catch (err) {
+      return;
+    }
   }, []);
 
   return <SensorItem data={values} />;
@@ -107,17 +120,21 @@ export const MagnetometerSensor = () => {
     available: false,
   });
   useEffect(() => {
-    magnetometer.subscribe(data => {
-      const {x, y, z} = data;
-      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
-        update({x, y, z}, setValues, 'm/s²');
-      } else {
-        setValues({
-          title: 'Magnetometer',
-          available: false,
-        });
-      }
-    });
+    try {
+      magnetometer.subscribe(data => {
+        const {x, y, z} = data;
+        if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
+          update({x, y, z}, setValues, 'm/s²');
+        } else {
+          setValues({
+            title: 'Magnetometer',
+            available: false,
+          });
+        }
+      });
+    } catch (err) {
+      return;
+    }
   }, []);
 
   return <SensorItem data={values} />;
@@ -129,17 +146,21 @@ export const GravitySensor = () => {
     available: false,
   });
   useEffect(() => {
-    gravity.subscribe(data => {
-      const {x, y, z} = data;
-      if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
-        update({x, y, z}, setValues, 'm/s²');
-      } else {
-        setValues({
-          title: 'Gravity',
-          available: false,
-        });
-      }
-    });
+    try {
+      gravity.subscribe(data => {
+        const {x, y, z} = data;
+        if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) {
+          update({x, y, z}, setValues, 'm/s²');
+        } else {
+          setValues({
+            title: 'Gravity',
+            available: false,
+          });
+        }
+      });
+    } catch (err) {
+      return;
+    }
   }, []);
 
   return <SensorItem data={values} />;
@@ -151,10 +172,14 @@ export const OrientationSensor = () => {
     available: false,
   });
   useEffect(() => {
-    orientation.subscribe(data => {
-      const {pitch, qw, qx, qy, qz, roll, yaws} = data;
-      update({pitch, qw, qx, qy, qz, roll, yaws}, setValues, '');
-    });
+    try {
+      orientation.subscribe(data => {
+        const {pitch, qw, qx, qy, qz, roll, yaws} = data;
+        update({pitch, qw, qx, qy, qz, roll, yaws}, setValues, '');
+      });
+    } catch (err) {
+      return;
+    }
   }, []);
 
   return <SensorItem data={values} />;

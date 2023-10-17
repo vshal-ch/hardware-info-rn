@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 
@@ -15,7 +16,7 @@ const SensorItem = ({data}) => {
   return (
     <View style={styles.item}>
       <Text style={[styles.title, styles.darkText]}>{data.title}</Text>
-      {data.available ? (
+      {data['available'] === true ? (
         <>
           <FlatList
             data={data.withkey}
@@ -29,7 +30,9 @@ const SensorItem = ({data}) => {
           />
         </>
       ) : (
-        <Text>Not available</Text>
+        <>
+          <Text>Sensor not available</Text>
+        </>
       )}
     </View>
   );
